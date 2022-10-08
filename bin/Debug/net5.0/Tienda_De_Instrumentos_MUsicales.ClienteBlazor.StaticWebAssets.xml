@@ -1,0 +1,5 @@
+﻿<StaticWebAssets Version="1.0">
+  <ContentRoot BasePath="/" Path="D:\Blazor.Proyecto\Tienda_De_Instrumentos_MUsicales.ClienteBlazor\bin\Debug\net5.0\wwwroot\" />
+  <ContentRoot BasePath="/" Path="D:\Blazor.Proyecto\Tienda_De_Instrumentos_MUsicales.ClienteBlazor\obj\Debug\net5.0\scopedcss\bundle\" />
+  <ContentRoot BasePath="_content/MudBlazor" Path="C:\Users\dell\.nuget\packages\mudblazor\5.2.5\build\..\staticwebassets\" />
+</StaticWebAssets>

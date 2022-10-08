@@ -1,0 +1,47 @@
+﻿@page "/contaxinstrumento/{id:int}"
+@using Models
+@using Services
+@inject IContactoService ContactoService
+
+<MudText Typo="Typo.h4">Contactos</MudText>
+
+@if (contactos == null)
+{
+    <p>Cargando...</p>
+}
+else
+{
+    <MudGrid>
+        @foreach (var item in contactos)
+        {
+            <MudItem xs="12" sm="10" md="6" lg="4">
+                <MudCard>
+                    <MudCardHeader Class="blue lighten-1">
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.h6">@item.Nombre</MudText>
+                        </CardHeaderContent>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <MudText Typo="Typo.body2">@item.Telefono</MudText>
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton Link="@($"/detalles/{item.Id}")" Variant="Variant.Outlined" Color="Color.Success">Detalles</MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+        }
+    </MudGrid>
+}
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+
+    IEnumerable<Contacto> contactos = new List<Contacto>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (id > 0)
+            contactos = await ContactoService.GetByCategoria(id);
+    }
+}

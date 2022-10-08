@@ -1,0 +1,51 @@
+﻿@page "/categorias"
+@using Models
+@using Services
+@inject ICategoriaService CategoriaService
+
+<MudText Typo="Typo.h3">Categoria</MudText>
+
+<MudGrid>
+    @foreach (var item in instrumentos)
+    {
+        string clasificacion = "";
+        <MudItem xs="12" sm="10" md="6" lg="4">
+            <MudCard>
+                <MudCardHeader Class="blue darken-1">
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h6">@item.Nombre</MudText>
+                    </CardHeaderContent>
+                </MudCardHeader>
+                <MudCardContent>
+                    @switch (item.Clasificacion)
+                    {
+                        case 1:
+                            clasificacion = "Primero";
+                            break;
+                        case 2:
+                            clasificacion = "Segundo";
+                            break;
+                        case 3:
+                            clasificacion = "Tercero";
+                            break;
+
+                    }
+                    <MudText Typo="Typo.body2">Clasificacion: @clasificacion</MudText>
+
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Link="@($"/contaxInstrumentos/{item.Id}")" Variant="Variant.Outlined" Color="Color.Tertiary"
+                               Class="text-center">Ver Contacto</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    }
+</MudGrid>
+
+@code {
+    IEnumerable<Categoria> instrumentos = new List<Categoria>();
+    protected override async Task OnInitializedAsync()
+    {
+        instrumentos = await CategoriaService.GetAll();
+    }
+}
